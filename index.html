@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Tycoon | IsaacJrzz</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <nav id="game-nav">
+            <button onclick="switchTab('shop')" class="nav-btn active">INFRAESTRUCTURA</button>
+            <button onclick="switchTab('achievements')" class="nav-btn">LOGROS</button>
+            <button onclick="showDeployConfirm()" id="deploy-btn-nav" class="nav-btn deploy-locked">DEPLOY (PRESTIGIO)</button>
+        </nav>
+
+        <section id="stats-section">
+            <div id="code-stream-container"></div>
+            <div class="main-counter">
+                <h1 id="loc-display">0 LoC</h1>
+                <p id="pps-display-sub">0 l/s</p>
+                <div id="multiplier-display">Bono de Experiencia: x1.0</div>
+            </div>
+            <button id="main-btn">git push <span class="arrow">➜</span></button>
+        </section>
+
+        <aside id="sidebar">
+            <div id="shop-section" class="tab-content active">
+                <div id="shop-list"></div>
+            </div>
+            <div id="achievements-section" class="tab-content">
+                <h3 class="tab-title">HITOS LOGRADOS</h3>
+                <div id="ach-list"></div>
+            </div>
+        </aside>
+
+        <footer id="console-footer">
+            <div id="console"></div>
+        </footer>
+    </div>
+
+    <div id="deploy-modal" class="modal">
+        <div class="modal-content">
+            <h3>¿Hacer Deploy a Producción?</h3>
+            <p>Reiniciarás el código actual pero ganarás experiencia permanente.</p>
+            <p id="deploy-reward-text" style="color: #00ff41; font-weight: bold; margin: 15px 0;"></p>
+            <div class="modal-btns">
+                <button onclick="executeDeploy()" class="confirm-btn">CONFIRMAR</button>
+                <button onclick="closeModal()" class="cancel-btn">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/engine.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
