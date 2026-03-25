@@ -1,38 +1,51 @@
-# PyPlatformer: El Exilio de la Sombra
+# ⌨️ DevOps Tycoon: The Incremental Coder
 
-Este proyecto consiste en el desarrollo de un juego de plataformas con interfaz grafica (GUI) utilizando Python y la libreria Pygame. El objetivo principal es la transicion de conceptos de programacion desde Java hacia la sintaxis y modismos de Python.
+**DevOps Tycoon** es un juego incremental (clicker) desarrollado íntegramente con **Vanilla JavaScript**. El proyecto simula la carrera de un desarrollador, desde escribir líneas de código manualmente hasta automatizar una infraestructura global de servidores e IAs.
 
-LORE DEL JUEGO
-En un reino de fantasia epica inspirado en el folklore medieval, el protagonista es un joven marginado que habita en una villa donde es objeto del desprecio colectivo. Su unico vinculo con la humanidad es una joven, la unica habitante que le ofrece trato y palabra. Tras la misteriosa desaparicion de la joven, la villa señala al protagonista como culpable. 
+Este proyecto ha sido creado por **IsaacJrzz** para demostrar habilidades en gestión de estados, lógica matemática de escalado y manipulación eficiente del DOM.
 
-Forzado al exilio y movido por la necesidad de redencion, el joven se adentra en territorios desconocidos para encontrarla. A lo largo de su viaje, debera formar alianzas inesperadas, enfrentar enemigos ancestrales y evolucionar sus habilidades para sobrevivir en un mundo que lo rechaza.
+---
 
-OBJETIVOS DEL PROYECTO
-- Implementacion de un Game Loop (Ciclo de Vida del Juego) estable a 60 FPS.
-- Gestion de Sprites y Grupos de Sprites para optimizar el renderizado grafico.
-- Simulacion de fisica: gravedad, aceleracion lateral y deteccion de colisiones.
-- Arquitectura basada en Programacion Orientada a Objetos (POO).
+## 🕹️ Cómo jugar (Sin instalación)
 
-ESPECIFICACIONES DE LA INTERFAZ (UI)
-El juego se ejecuta en una ventana grafica independiente con las siguientes caracteristicas:
-- Resolucion nativa: 800x600 pixeles.
-- Renderizado de superficies (Surfaces) para personajes y entornos.
-- Sistema de coordenadas: Origen (0,0) en la esquina superior izquierda.
+Este proyecto es una aplicación web estática, por lo que **no requiere configurar ningún entorno ni instalar dependencias**.
 
-ARQUITECTURA DEL CODIGO
-- main.py: Punto de entrada, inicializacion de Pygame y bucle principal.
-- player.py: Clase Player. Gestiona movimiento, fisica de salto y estados del heroe.
-- settings.py: Constantes globales (colores RGB, variables de fisica, rutas).
-- level.py: Gestion de plataformas, enemigos y scroll de pantalla.
+1.  **Local:** Descarga los archivos del repositorio.
+2.  **Ejecución:** Abre el archivo `index.html` en cualquier navegador (Chrome, Firefox, Brave, etc.).
+3.  **Live Demo:** [¡Juega el Demo aquí!](https://IsaacJrzz.github.io/devops-tycoon/) *(Activa GitHub Pages en tu repo para que este link funcione)*
 
-REQUERIMIENTOS TECNICOS
-- Python 3.x
-- Pygame 2.x
+---
 
-CONTROLES DE USUARIO
-- Movimiento: Flechas de direccion o teclas A / D.
-- Salto: Barra espaciadora o Flecha Arriba.
-- Salir: Tecla ESC o cierre de ventana.
+## 🛠️ Stack Tecnológico
 
-IMPLEMENTACION DE FISICA
-La gravedad se aplica mediante la modificacion del vector de velocidad vertical en cada frame. Las colisiones se detectan mediante la interseccion de los rectangulos de colision (AABB) entre el jugador y los elementos del nivel.
+* **JavaScript (ES6+):** Motor lógico, cálculos de producción y manejo de eventos.
+* **HTML5:** Estructura de la interfaz y contenedores dinámicos.
+* **CSS3:** Diseño estilo "Retro Terminal" con **CSS Grid** para una distribución limpia y profesional.
+
+---
+
+## 🚀 Desafíos Técnicos Resueltos
+
+### 1. Motor de Cálculo (Game Loop)
+Implementé un `setInterval` que procesa los ingresos pasivos cada 100ms. Esto asegura que la progresión de las líneas de código (`LoC`) sea fluida y visualmente atractiva para el usuario.
+
+### 2. Algoritmo de Escalado Exponencial
+Para balancear la economía del juego, utilicé la fórmula:
+$$Precio = Base \times 1.15^{Cantidad}$$
+Esto garantiza que el jugador siempre tenga un objetivo desafiante y evita que el juego se vuelva monótono rápidamente.
+
+### 3. Persistencia de Datos (LocalStorage)
+El juego incluye un sistema de guardado automático. Los datos del usuario (puntos, mejoras compradas y precios actuales) se almacenan en el navegador, permitiendo retomar la partida incluso después de cerrar la sesión.
+
+---
+
+## 📂 Estructura del Código
+
+El código está organizado de forma modular para facilitar su lectura:
+
+* **State Management:** Un objeto centralizado que actúa como única fuente de verdad.
+* **UI Update System:** Funciones dedicadas a renderizar los cambios solo cuando es necesario, optimizando el rendimiento del navegador.
+
+---
+
+Desarrollado con ☕ por **IsaacJrzz**.
