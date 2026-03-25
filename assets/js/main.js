@@ -166,3 +166,91 @@ window.onload = () => {
 };
 
 setInterval(saveGame, 5000);
+
+function spawnRandomEvent() {
+    const isBug = Math.random() > 0.4; // 60% bugs, 40% boosts
+    const eventDiv = document.createElement('div');
+    eventDiv.className = `random-event ${isBug ? 'event-bug' : 'event-boost'}`;
+    
+    // Posicionamiento en unidades de pantalla (vw/vh)
+    const x = Math.random() * 70 + 15;
+    const y = Math.random() * 60 + 20;
+    eventDiv.style.left = `${x}vw`;
+    eventDiv.style.top = `${y}vh`;
+
+    if (isBug) {
+        eventDiv.innerText = "✖ CRITICAL BUG";
+        
+        const bugTimer = setTimeout(() => {
+            const loss = Math.floor(state.loc * 0.10 + 100);
+            state.loc = Math.max(0, state.loc - loss);
+            logMessage(`SYSTEM FAILURE: Bug ignorado. -${formatNum(loss)} LoC`);
+            
+            document.body.style.backgroundColor = "#440000";
+            setTimeout(() => document.body.style.backgroundColor = "", 200);
+            
+            eventDiv.remove();
+            updateUI();
+        }, 4000);
+
+        eventDiv.onclick = () => {
+            clearTimeout(bugTimer);
+            const reward = Math.floor(state.clickPower * 60);
+            state.loc += reward;
+            logMessage(`HOTFIX: Bug reparado. +${formatNum(reward)} LoC`);
+            eventDiv.remove();
+            updateUI();
+        };
+    } else {
+        // --- NUEVO BOOST: OVERCLOCK (En blanco) ---
+        eventDiv.innerText = "[ SYSTEM OVERCLOCK ]";
+        eventDiv.style.color = "#ffffff"; // Forzamos el texto en blanco
+        
+        eventDiv.onclick = () => {
+            state.isTurbo = true;
+            let timeLeft = 10;
+            
+            const timerDiv = document.getElementById('turbo-timer');
+            const secondsSpan = document.getElementById('turbo-seconds');
+            const mainBtn = document.getElementById('main-btn');
+            
+            if(timerDiv) {
+                timerDiv.style.display = 'block';
+                timerDiv.innerHTML = `OVERCLOCK: <span id="turbo-seconds">${timeLeft}</span>s`;
+            }
+            if(mainBtn) mainBtn.classList.add('turbo-glow');
+            
+            calculatePPS(); 
+            logMessage("SISTEMA: Overclocking de CPU detectado. PPS x3");
+            eventDiv.remove();
+            updateUI();
+            
+            const countdown = setInterval(() => {
+                timeLeft--;
+                const currentSecondsSpan = document.getElementById('turbo-seconds');
+                if (currentSecondsSpan) currentSecondsSpan.innerText = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    state.isTurbo = false;
+                    if(mainBtn) mainBtn.classList.remove('turbo-glow');
+                    if(timerDiv) timerDiv.style.display = 'none';
+                    calculatePPS();
+                    logMessage("SISTEMA: Temperatura normalizada. Overclock finalizado.");
+                    updateUI();
+                }
+            }, 1000);
+        };
+
+        setTimeout(() => { if(eventDiv.parentNode) eventDiv.remove(); }, 6000);
+    }
+
+    document.body.appendChild(eventDiv);
+}
+
+// --- LANZADOR: Cada 60 segundos (1 minuto) ---
+setInterval(() => {
+    if (Math.random() < 0.25) { // 25% de probabilidad cada minuto
+        spawnRandomEvent();
+    }
+}, 60000);

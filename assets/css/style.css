@@ -372,3 +372,103 @@ body {
 .credits-box strong {
     color: #ffffff;
 }
+
+/*BUGS*/
+/* =========================================
+   SISTEMA DE EVENTOS ALEATORIOS (BUGS & BOOSTS)
+   ========================================= */
+
+.random-event {
+    position: fixed; /* Flota sobre toda la ventana del navegador */
+    padding: 15px 25px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer !important;
+    
+    /* PRIORIDAD MÁXIMA */
+    z-index: 999999 !important; 
+    pointer-events: auto !important;
+    user-select: none;
+    
+    /* DISEÑO */
+    border: 2px solid #fff;
+    border-radius: 4px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 180px; /* Evita que se vea comprimido */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    
+    /* Evita que animaciones de otros elementos lo afecten */
+    isolation: isolate; 
+}
+
+/* Área de clic extendida (invisible) para no fallar el clic */
+.random-event::after {
+    content: '';
+    position: absolute;
+    inset: -15px;
+}
+
+.random-event:active {
+    transform: scale(0.9) !important;
+}
+
+/* Variante BUG: Rojo puro y parpadeante */
+.event-bug {
+    background-color: #ff0000 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 30px #ff0000;
+    animation: bug-glitch 0.2s infinite;
+}
+
+@keyframes bug-glitch {
+    0% { transform: translate(0,0); filter: hue-rotate(0deg); }
+    25% { transform: translate(-3px, 2px); }
+    50% { transform: translate(3px, -2px); background-color: #aa0000; }
+    75% { transform: translate(-1px, -1px); }
+    100% { transform: translate(0,0); }
+}
+
+/* Variante BOOST: Verde Neón (Monokai Pro) */
+.event-boost {
+    background-color: #a6e22e !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 0 30px #a6e22e;
+    animation: boost-float 2s infinite ease-in-out;
+}
+
+@keyframes boost-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* =========================================
+   EFECTOS ESPECIALES DE TURBO
+   ========================================= */
+
+/* Brillo extremo para el botón principal durante el Turbo */
+.turbo-glow {
+    position: relative;
+    animation: turbo-vibration 0.1s infinite alternate, turbo-aura 1.5s infinite alternate !important;
+    border-color: #fff !important;
+    color: #fff !important;
+    background: rgba(166, 226, 46, 0.2) !important;
+}
+
+@keyframes turbo-vibration {
+    from { transform: translate(-1px, 1px); }
+    to { transform: translate(1px, -1px); }
+}
+
+@keyframes turbo-aura {
+    0% {
+        box-shadow: 0 0 15px #a6e22e, inset 0 0 10px #a6e22e;
+        text-shadow: 0 0 5px #fff;
+    }
+    100% {
+        box-shadow: 0 0 40px #a6e22e, 0 0 70px rgba(166, 226, 46, 0.4), inset 0 0 20px #a6e22e;
+        text-shadow: 0 0 15px #fff;
+    }
+}

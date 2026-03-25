@@ -67,13 +67,13 @@ function formatNum(num) {
  */
 function calculatePPS() {
     let basePPS = state.upgrades.reduce((acc, el) => acc + (el.count * (el.yield || 0)), 0);
-    
-    // Ahora la fórmula es: Base * (1 + multiplicador)
-    // Si prestigeMultiplier es 0.5, ganarás un 50% más (x1.5)
     let totalMult = 1 + state.prestigeMultiplier;
     
+    // Si el turbo está activo, aplicamos el x3 extra aquí
+    if (state.isTurbo) totalMult *= 3; 
+
     state.pps = basePPS * totalMult;
     
     const kb = state.upgrades.find(u => u.id === 'keyboard').count;
-    state.clickPower = (1 + (kb * 3)) * totalMult;
+    state.clickPower = (1 + (kb * 3)) * (1 + state.prestigeMultiplier); // El click no suele llevar turbo, pero puedes ponerlo si quieres
 }
