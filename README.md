@@ -1,51 +1,42 @@
-# ⌨️ DevOps Tycoon: The Incremental Coder
+# DOCUMENTACION TECNICA: ALPHA
+## SISTEMA DE SIMULACION DE PRODUCCION DE SOFTWARE
 
-**DevOps Tycoon** es un juego incremental (clicker) desarrollado íntegramente con **Vanilla JavaScript**. El proyecto simula la carrera de un desarrollador, desde escribir líneas de código manualmente hasta automatizar una infraestructura global de servidores e IAs.
+### 1. RESUMEN EJECUTIVO
+**ALPHA** es un entorno de simulación incremental diseñado para modelar el ciclo de vida de la producción de software, desde la generación manual de código hasta la implementación de infraestructuras autónomas de alta disponibilidad.
 
-Este proyecto ha sido creado por **IsaacJrzz** para demostrar habilidades en gestión de estados, lógica matemática de escalado y manipulación eficiente del DOM.
+### 2. ARQUITECTURA DEL MOTOR
+El sistema opera mediante un bucle de eventos asíncrono que procesa dos flujos de datos principales:
 
----
+* **Input Manual (Click Power):** Procesamiento de interacciones directas del usuario para la generación inmediata de unidades de código (LoC).
+* **Producción Pasiva (LPS):** Cálculo de rendimiento por segundo basado en la agregación de activos de infraestructura adquiridos.
 
-## 🕹️ Cómo jugar (Sin instalación)
+### 3. ESPECIFICACIONES DE INFRAESTRUCTURA
+El escalado de la producción en **ALPHA** se gestiona a través de seis niveles de activos técnicos:
 
-Este proyecto es una aplicación web estática, por lo que **no requiere configurar ningún entorno ni instalar dependencias**.
+* **Specialty Coffee:** Optimización metabólica para el incremento marginal de la tasa de producción base.
+* **Mechanical Keyboards:** Mejora de hardware orientada a maximizar el rendimiento de la potencia por clic.
+* **Junior Developers:** Escalado horizontal de recursos humanos para la generación continua de lógica.
+* **AWS Nodes:** Instancias virtuales en la nube para el procesamiento masivo de datos y generación de LoC.
+* **Bash Scripts:** Automatización lógica de procesos de sistema para la reducción de la intervención manual.
+* **AI Auto-Coder:** Integración de redes neuronales para la generación autónoma de código de alto nivel.
 
-1.  **Local:** Descarga los archivos del repositorio.
-2.  **Ejecución:** Abre el archivo `index.html` en cualquier navegador (Chrome, Firefox, Brave, etc.).
-3.  **Live Demo:** [¡Juega el Demo aquí!](https://IsaacJrzz.github.io/devops-tycoon/) *(Activa GitHub Pages en tu repo para que este link funcione)*
+### 4. PROTOCOLO DE DESPLIEGUE (PRESTIGIO)
+La mecánica de "Deploy" permite la transición del entorno de desarrollo de **ALPHA** a una instancia de producción global.
 
----
+* **Requisito de Activación:** El sistema debe haber generado un mínimo acumulado de 1,000,000 LoC.
+* **Efecto de Reset:** La ejecución del despliegue liquida todos los activos actuales y el balance de LoC.
+* **Bono de Experiencia:** Se aplica un multiplicador permanente a la producción futura, derivado directamente del volumen de código procesado en el ciclo anterior.
 
-## 🛠️ Stack Tecnológico
+### 5. COMPONENTES DE TELEMETRIA Y UI
+* **Consola de Sistema:** Registro de eventos en tiempo real con una pila de 5 líneas. Implementa un degradado de opacidad para priorizar la telemetría reciente sobre los datos históricos.
+* **Stream de Código:** Sistema de partículas visuales independiente que simula la actividad de la terminal sin comprometer el rendimiento del hilo principal.
+* **Registro de Hitos:** Módulo de monitoreo de 28 logros técnicos basados en volumen de producción y densidad de infraestructura.
 
-* **JavaScript (ES6+):** Motor lógico, cálculos de producción y manejo de eventos.
-* **HTML5:** Estructura de la interfaz y contenedores dinámicos.
-* **CSS3:** Diseño estilo "Retro Terminal" con **CSS Grid** para una distribución limpia y profesional.
+### 6. MODELO MATEMATICO DE PROGRESIÓN
+El incremento del coste de adquisición sigue una curva exponencial para garantizar el equilibrio del sistema a largo plazo:
 
----
+$$Cost = BaseCost \times 1.4^{n}$$
 
-## 🚀 Desafíos Técnicos Resueltos
-
-### 1. Motor de Cálculo (Game Loop)
-Implementé un `setInterval` que procesa los ingresos pasivos cada 100ms. Esto asegura que la progresión de las líneas de código (`LoC`) sea fluida y visualmente atractiva para el usuario.
-
-### 2. Algoritmo de Escalado Exponencial
-Para balancear la economía del juego, utilicé la fórmula:
-$$Precio = Base \times 1.15^{Cantidad}$$
-Esto garantiza que el jugador siempre tenga un objetivo desafiante y evita que el juego se vuelva monótono rápidamente.
-
-### 3. Persistencia de Datos (LocalStorage)
-El juego incluye un sistema de guardado automático. Los datos del usuario (puntos, mejoras compradas y precios actuales) se almacenan en el navegador, permitiendo retomar la partida incluso después de cerrar la sesión.
-
----
-
-## 📂 Estructura del Código
-
-El código está organizado de forma modular para facilitar su lectura:
-
-* **State Management:** Un objeto centralizado que actúa como única fuente de verdad.
-* **UI Update System:** Funciones dedicadas a renderizar los cambios solo cuando es necesario, optimizando el rendimiento del navegador.
-
----
-
-Desarrollado con ☕ por **IsaacJrzz**.
+**Donde:**
+* **BaseCost:** Valor de entrada inicial del activo.
+* **n:** Cantidad total de unidades de dicha infraestructura en el estado actual.
