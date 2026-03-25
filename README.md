@@ -1,29 +1,38 @@
-# PyPlatformer: Python Learning Project
+# PyPlatformer: El Exilio de la Sombra
 
-Este proyecto consiste en el desarrollo de un juego de plataformas utilizando Python y la libreria Pygame. El objetivo principal es la transicion de conceptos de programacion desde Java hacia la sintaxis y modismos de Python.
+Este proyecto consiste en el desarrollo de un juego de plataformas con interfaz grafica (GUI) utilizando Python y la libreria Pygame. El objetivo principal es la transicion de conceptos de programacion desde Java hacia la sintaxis y modismos de Python.
+
+LORE DEL JUEGO
+En un reino de fantasia epica inspirado en el folklore medieval, el protagonista es un joven marginado que habita en una villa donde es objeto del desprecio colectivo. Su unico vinculo con la humanidad es una joven, la unica habitante que le ofrece trato y palabra. Tras la misteriosa desaparicion de la joven, la villa señala al protagonista como culpable. 
+
+Forzado al exilio y movido por la necesidad de redencion, el joven se adentra en territorios desconocidos para encontrarla. A lo largo de su viaje, debera formar alianzas inesperadas, enfrentar enemigos ancestrales y evolucionar sus habilidades para sobrevivir en un mundo que lo rechaza.
 
 OBJETIVOS DEL PROYECTO
-- Implementacion de un Game Loop (Ciclo de Vida del Juego).
-- Gestion de Sprites y Grupos de Sprites para optimizar el renderizado.
-- Simulacion de fisica basica: gravedad, aceleracion lateral y deteccion de colisiones.
+- Implementacion de un Game Loop (Ciclo de Vida del Juego) estable a 60 FPS.
+- Gestion de Sprites y Grupos de Sprites para optimizar el renderizado grafico.
+- Simulacion de fisica: gravedad, aceleracion lateral y deteccion de colisiones.
 - Arquitectura basada en Programacion Orientada a Objetos (POO).
 
-ARQUITECTURA DEL CODIGO
-El proyecto se divide en los siguientes modulos para mantener la escalabilidad:
+ESPECIFICACIONES DE LA INTERFAZ (UI)
+El juego se ejecuta en una ventana grafica independiente con las siguientes caracteristicas:
+- Resolucion nativa: 800x600 pixeles.
+- Renderizado de superficies (Surfaces) para personajes y entornos.
+- Sistema de coordenadas: Origen (0,0) en la esquina superior izquierda.
 
-- main.py: Punto de entrada del programa. Contiene la inicializacion de Pygame y el bucle principal de eventos.
-- player.py: Definicion de la clase Player. Hereda de pygame.sprite.Sprite y gestiona el estado del personaje.
-- settings.py: Almacena constantes de configuracion como dimensiones de resolucion, valores de fisica y paletas de colores.
-- level.py: Gestiona la instancia de las plataformas y el entorno del juego.
+ARQUITECTURA DEL CODIGO
+- main.py: Punto de entrada, inicializacion de Pygame y bucle principal.
+- player.py: Clase Player. Gestiona movimiento, fisica de salto y estados del heroe.
+- settings.py: Constantes globales (colores RGB, variables de fisica, rutas).
+- level.py: Gestion de plataformas, enemigos y scroll de pantalla.
 
 REQUERIMIENTOS TECNICOS
 - Python 3.x
 - Pygame 2.x
 
-CONTROLES
-- Movimiento: Flechas de direccion (Izquierda / Derecha) o teclas A / D.
+CONTROLES DE USUARIO
+- Movimiento: Flechas de direccion o teclas A / D.
 - Salto: Barra espaciadora o Flecha Arriba.
 - Salir: Tecla ESC o cierre de ventana.
 
 IMPLEMENTACION DE FISICA
-La gravedad se calcula mediante la modificacion del vector de velocidad en el eje Y de forma incremental en cada frame, aplicando el limite de colision con el objeto suelo para resetear la aceleracion vertical.
+La gravedad se aplica mediante la modificacion del vector de velocidad vertical en cada frame. Las colisiones se detectan mediante la interseccion de los rectangulos de colision (AABB) entre el jugador y los elementos del nivel.
