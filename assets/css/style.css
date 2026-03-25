@@ -1,4 +1,8 @@
+/* =========================================
+   VARIABLES Y TEMAS
+   ========================================= */
 :root {
+    /* Tema por defecto: MATRIX */
     --bg: #0a0a0a;
     --green: #00ff41;
     --dark-green: #003b11;
@@ -7,6 +11,36 @@
     --radius: 8px;
 }
 
+/* TEMA DRACULA (Morados) */
+body.theme-dracula {
+    --bg: #282a36;
+    --green: #bd93f9;
+    --dark-green: #44475a;
+    --border: #6272a4;
+    --gray-text: #94a3b8;
+}
+
+/* TEMA POWERSHELL (Azules) */
+body.theme-powershell {
+    --bg: #012456;
+    --green: #eeedf0;
+    --dark-green: #015cbb;
+    --border: #00a4ef;
+    --gray-text: #cccccc;
+}
+
+/* TEMA MONOKAI (Cálidos) */
+body.theme-monokai {
+    --bg: #272822;
+    --green: #f92672;
+    --dark-green: #383838;
+    --border: #f92672;
+    --gray-text: #fd971f;
+}
+
+/* =========================================
+   ESTILOS BASE
+   ========================================= */
 * { box-sizing: border-box; }
 
 body {
@@ -19,6 +53,7 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 #game-container {
@@ -31,9 +66,12 @@ body {
     background: #000;
     border-radius: var(--radius);
     overflow: hidden;
+    transition: border-color 0.5s ease;
 }
 
-/* NAVEGACIÓN: Ajustes al extremo derecho */
+/* =========================================
+   NAVEGACIÓN
+   ========================================= */
 #game-nav {
     grid-column: span 2;
     padding: 10px 20px;
@@ -42,6 +80,7 @@ body {
     border-bottom: 1px solid var(--border);
     align-items: center;
     background: #050505;
+    transition: border-color 0.5s ease;
 }
 
 .nav-left-group {
@@ -57,7 +96,7 @@ body {
     cursor: pointer;
     font-family: inherit;
     border-radius: var(--radius);
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
 .nav-btn.active { 
@@ -65,7 +104,11 @@ body {
     border-color: var(--green); 
 }
 
-/* Estado del Botón Deploy */
+.nav-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Botón Deploy */
 .nav-btn.deploy-locked { color: #ff4444; border-color: #552222; opacity: 0.6; cursor: not-allowed; }
 .nav-btn.deploy-ready { 
     color: var(--green) !important; 
@@ -80,7 +123,9 @@ body {
     50% { box-shadow: 0 0 20px rgba(0,255,65,0.5); }
 }
 
-/* SECCIÓN CENTRAL (STATS) */
+/* =========================================
+   SECCIÓN CENTRAL (STATS)
+   ========================================= */
 #stats-section {
     position: relative;
     display: flex;
@@ -89,6 +134,7 @@ body {
     align-items: center;
     border-right: 1px solid var(--border);
     overflow: hidden;
+    transition: border-color 0.5s ease;
 }
 
 #code-stream-container {
@@ -116,7 +162,12 @@ body {
 }
 
 .main-counter { z-index: 2; text-align: center; pointer-events: none; }
-#loc-display { font-size: 5rem; margin: 0; text-shadow: 0 0 15px rgba(0,255,65,0.3); }
+#loc-display { 
+    font-size: 5rem; 
+    margin: 0; 
+    text-shadow: 0 0 15px rgba(0,255,65,0.3); 
+    transition: color 0.5s ease;
+}
 
 #main-btn {
     z-index: 3;
@@ -132,16 +183,21 @@ body {
     transition: 0.2s;
 }
 
-#main-btn:hover { background: var(--green); color: #000; box-shadow: 0 0 20px var(--green); }
+#main-btn:hover { 
+    background: var(--green); 
+    color: #000; 
+    box-shadow: 0 0 20px var(--green); 
+}
 
-/* SIDEBAR (Tienda y Logros) */
+/* =========================================
+   SIDEBAR (TIENDA Y LOGROS)
+   ========================================= */
 #sidebar { 
     padding: 20px; 
     overflow-y: auto; 
     background: #050505; 
 }
 
-/* Scrollbar personalizada para el Sidebar */
 #sidebar::-webkit-scrollbar { width: 6px; }
 #sidebar::-webkit-scrollbar-track { background: #000; }
 #sidebar::-webkit-scrollbar-thumb { background: var(--dark-green); border-radius: 10px; }
@@ -161,7 +217,7 @@ body {
     text-align: center;
 }
 
-/* ITEMS DE LA TIENDA */
+/* SHOP ITEMS */
 .shop-item {
     width: 100%;
     background: #0f0f0f;
@@ -175,13 +231,18 @@ body {
     transition: 0.3s;
 }
 
-.shop-item.affordable { border-color: var(--green); color: var(--green); cursor: pointer; }
-.shop-item.affordable:hover { background: #151515; }
+.shop-item.affordable { 
+    border-color: var(--green); 
+    color: var(--green); 
+    cursor: pointer; 
+}
 
 .progress-bar-bg { background: #000; height: 4px; width: 100%; margin-top: 10px; border-radius: 10px; overflow: hidden; }
 .progress-bar-fill { background: var(--green); height: 100%; width: 0%; transition: 0.3s; }
 
-/* CONSOLA (Footer) */
+/* =========================================
+   CONSOLA (FOOTER)
+   ========================================= */
 #console-footer { 
     grid-column: span 2; 
     border-top: 1px solid var(--border); 
@@ -189,6 +250,7 @@ body {
     background: #000;
     display: flex;
     align-items: center;
+    transition: border-color 0.5s ease;
 }
 
 #console {
@@ -213,19 +275,16 @@ body {
     font-weight: bold;
 }
 
-/* LOGROS */
-#ach-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
+/* =========================================
+   LOGROS
+   ========================================= */
 .achievement-card {
     background: rgba(0, 0, 0, 0.6);
     border: 1px solid var(--border);
     padding: 15px;
     border-radius: var(--radius);
     transition: all 0.4s ease;
+    margin-bottom: 12px;
 }
 
 .achievement-card.locked {
@@ -237,42 +296,79 @@ body {
 .achievement-card.unlocked {
     opacity: 1;
     border: 2px solid var(--green);
-    background: linear-gradient(145deg, #000000, #001004);
+    background: linear-gradient(145deg, #000000, rgba(0, 255, 65, 0.05));
     box-shadow: 0 0 15px rgba(0, 255, 65, 0.15);
-    animation: unlock-glow 1s ease-out;
 }
 
-.ach-title {
-    font-weight: bold;
-    font-size: 0.9rem;
-    display: block;
-    color: var(--green);
-    text-transform: uppercase;
-}
-
-.ach-desc {
-    font-size: 0.75rem;
-    color: #888;
-    margin-top: 8px;
-    border-top: 1px solid #1a1a1a;
-    padding-top: 5px;
-}
-
-@keyframes unlock-glow {
-    0% { transform: scale(0.95); background: var(--green); box-shadow: 0 0 40px var(--green); }
-    100% { transform: scale(1); background: #000; }
-}
-
-/* MODALES */
+/* =========================================
+   MODALES
+   ========================================= */
 .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; justify-content: center; align-items: center; }
 .modal-content { 
-    background: #0a0a0a; 
+    background: var(--bg); 
     padding: 30px; 
     border-radius: 15px; 
     border: 2px solid var(--green); 
     text-align: center;
     box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+    transition: background-color 0.5s ease, border-color 0.5s ease;
 }
 
 .confirm-btn { background: var(--green); border: none; padding: 12px 25px; border-radius: var(--radius); cursor: pointer; font-weight: bold; color: #000; font-family: inherit; }
 .cancel-btn { background: none; border: 1px solid #ff4444; color: #ff4444; padding: 12px 25px; border-radius: var(--radius); cursor: pointer; margin-left: 10px; font-family: inherit; }
+
+/* Forzar que el texto de los botones de tema sea blanco */
+#settings-section .nav-btn {
+    color: #ffffff !important;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8); /* Opcional: añade sombra para que resalte más */
+}
+
+/* Mantener el efecto hover si quieres que cambie al pasar el ratón */
+#settings-section .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.settings-group p {
+    margin: 5px 0;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+/* Mejora visual para los botones de exportar/importar */
+.settings-group .nav-btn:active {
+    transform: scale(0.95);
+    background: rgba(255,255,255,0.1);
+}
+
+.credits-box {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    padding: 15px;
+    border-radius: var(--radius);
+    max-height: 150px;
+    overflow-y: auto;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+}
+
+/* Scrollbar pequeña para los créditos */
+.credits-box::-webkit-scrollbar {
+    width: 4px;
+}
+
+.credits-box::-webkit-scrollbar-thumb {
+    background: var(--dark-green);
+    border-radius: 10px;
+}
+
+.credits-box p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+/* Forzar nombres destacados en blanco para que resalten */
+.credits-box strong {
+    color: #ffffff;
+}

@@ -1,9 +1,10 @@
 let state = {
     loc: 0,
     totalLocEver: 0,
-    prestigeMultiplier: 1.0,
+    prestigeMultiplier: 0,
     pps: 0,
     clickPower: 1,
+    currentTheme: 'default', // <--- NUEVA VARIABLE PARA EL TEMA
     upgrades: [
         { id: 'coffee', name: 'Café de Especialidad', cost: 10, baseCost: 10, yield: 0.2, count: 0, discovered: true },
         { id: 'keyboard', name: 'Teclado Mecánico', cost: 100, baseCost: 100, yield: 0, clickBonus: 3, count: 0, discovered: false },
@@ -25,8 +26,7 @@ let state = {
         { id: 'a9', name: 'SRE Senior', desc: 'Llegar a 5,000,000 LoC', condition: 5000000, type: 'loc', reached: false },
         { id: 'a10', name: 'Dios del Binario', desc: 'Llegar a 10,000,000 LoC', condition: 10000000, type: 'loc', reached: false },
         
-        // Logros de Tienda (Se generan dinámicamente o se escriben)
-        // He añadido lógica en main.js para que estos funcionen:
+        // Logros de Tienda (Upgrade Achievements)
         { id: 'up_coffee_1', name: 'Cafeína Básica', desc: 'Comprar 1 Café', condition: 1, type: 'upgrade', upgradeId: 'coffee', reached: false },
         { id: 'up_coffee_50', name: 'Adicto al Grano', desc: 'Comprar 50 Cafés', condition: 50, type: 'upgrade', upgradeId: 'coffee', reached: false },
         { id: 'up_coffee_100', name: 'Infarto Programado', desc: 'Comprar 100 Cafés', condition: 100, type: 'upgrade', upgradeId: 'coffee', reached: false },
@@ -53,15 +53,27 @@ let state = {
     ]
 };
 
+/**
+ * FORMATEO DE NÚMEROS (k, M)
+ */
 function formatNum(num) {
     if (num >= 1000000) return (num / 1000000).toFixed(2) + 'M';
     if (num >= 1000) return (num / 1000).toFixed(1) + 'k';
     return Math.floor(num);
 }
 
+/**
+ * CÁLCULO DE PRODUCCIÓN POR SEGUNDO Y PODER DE CLIC
+ */
 function calculatePPS() {
     let basePPS = state.upgrades.reduce((acc, el) => acc + (el.count * (el.yield || 0)), 0);
-    state.pps = basePPS * state.prestigeMultiplier;
+    
+    // Ahora la fórmula es: Base * (1 + multiplicador)
+    // Si prestigeMultiplier es 0.5, ganarás un 50% más (x1.5)
+    let totalMult = 1 + state.prestigeMultiplier;
+    
+    state.pps = basePPS * totalMult;
+    
     const kb = state.upgrades.find(u => u.id === 'keyboard').count;
-    state.clickPower = (1 + (kb * 3)) * state.prestigeMultiplier;
+    state.clickPower = (1 + (kb * 3)) * totalMult;
 }

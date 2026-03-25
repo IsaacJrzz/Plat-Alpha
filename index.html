@@ -14,7 +14,6 @@
                 <button onclick="switchTab('achievements')" class="nav-btn">LOGROS</button>
                 <button onclick="showDeployConfirm()" id="deploy-btn-nav" class="nav-btn deploy-locked">DEPLOY (LOCKED)</button>
             </div>
-            
             <button onclick="switchTab('settings')" class="nav-btn">AJUSTES</button>
         </nav>
 
@@ -38,10 +37,53 @@
             </div>
             <div id="settings-section" class="tab-content">
                 <h3 class="tab-title">SISTEMA</h3>
-                <div class="shop-item affordable" style="border-color: #ff4444; margin-top: 20px; cursor: default;">
+                <div class="settings-group" style="padding: 10px;">
+                    <p style="font-size: 0.8rem; color: var(--green); margin-bottom: 10px;">ENTORNO DE TERMINAL (THEME):</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                        <button onclick="setTheme('default')" class="nav-btn" style="font-size: 0.7rem; border-color: #00ff41;">MATRIX</button>
+                        <button onclick="setTheme('dracula')" class="nav-btn" style="font-size: 0.7rem; border-color: #bd93f9;">DRACULA</button>
+                        <button onclick="setTheme('powershell')" class="nav-btn" style="font-size: 0.7rem; border-color: #00a4ef;">POWERSHELL</button>
+                        <button onclick="setTheme('monokai')" class="nav-btn" style="font-size: 0.7rem; border-color: #f92672;">MONOKAI</button>
+                    </div>
+                </div>
+
+                <div class="settings-group" style="margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 15px;">
+                    <p style="color: var(--green); font-size: 0.8rem; margin-bottom: 10px;">DATA MANAGEMENT:</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                        <button onclick="exportSave()" class="nav-btn" style="color: white !important; border-color: #555;">EXPORTAR JSON</button>
+                        <button onclick="importSave()" class="nav-btn" style="color: white !important; border-color: #555;">IMPORTAR JSON</button>
+                    </div>
+                    <p style="color: #666; font-size: 0.65rem; margin-top: 8px;">* Copia el código generado para mover tu partida.</p>
+                </div>
+
+                <div class="settings-group" style="margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 15px;">
+                    <p style="color: var(--green); font-size: 0.8rem; margin-bottom: 10px;">INFO & LEGAL:</p>
+                    
+                    <div class="credits-box">
+                        <p><strong>DevOps Tycoon v1.5</strong></p>
+                        <p>Desarrollado por: <strong>Isaac Jrz</strong></p>
+                        <hr style="border: 0; border-top: 1px solid var(--border); margin: 10px 0;">
+                        
+                        <p style="font-size: 0.7rem; color: #888;">
+                            &copy; 2024 - 2026 Isaac Jrz. Todos los derechos reservados.
+                        </p>
+                        
+                        <p style="font-size: 0.65rem; color: #666; margin-top: 10px; line-height: 1.2;">
+                            Este software se proporciona "tal cual", sin garantía de ningún tipo. 
+                            El uso de este simulador es meramente recreativo. 
+                            Las marcas mencionadas (AWS, Docker, etc.) son propiedad de sus respectivos dueños.
+                        </p>
+                        
+                        <p style="font-size: 0.7rem; color: var(--green); margin-top: 10px;">
+                            STACK: HTML5, CSS3, Vanilla JS.
+                        </p>
+                    </div>
+                </div>
+                                
+                <div class="shop-item affordable" style="border-color: #ff4444; margin-top: 30px; cursor: default;">
                     <strong style="color: #ff4444;">REINICIO TOTAL</strong>
-                    <p style="font-size: 0.8rem; margin: 10px 0; color: #888;">Borra todo tu progreso, multiplicadores y logros permanentemente.</p>
-                    <button onclick="hardReset()" style="background: #ff4444; color: #000; border: none; padding: 10px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 4px;">BORRAR PARTIDA</button>
+                    <p style="font-size: 0.7rem; margin: 10px 0; color: #888;">Borra todo tu progreso permanentemente.</p>
+                    <button onclick="hardReset()" style="background: #ff4444; color: #000; border: none; padding: 8px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 4px;">BORRAR PARTIDA</button>
                 </div>
             </div>
         </aside>
@@ -54,7 +96,6 @@
     <div id="deploy-modal" class="modal">
         <div class="modal-content">
             <h3>¿Hacer Deploy a Producción?</h3>
-            <p>Reiniciarás el código actual pero ganarás experiencia permanente.</p>
             <p id="deploy-reward-text" style="color: #00ff41; font-weight: bold; margin: 15px 0;"></p>
             <div class="modal-btns">
                 <button onclick="executeDeploy()" class="confirm-btn">CONFIRMAR</button>
@@ -63,8 +104,8 @@
         </div>
     </div>
 
-    <script src="assets/js/engine.js"></script>
-    <script src="assets/js/ui.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/engine.js"></script>
 </body>
 </html>
