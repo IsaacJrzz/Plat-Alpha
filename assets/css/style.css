@@ -143,7 +143,7 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 1;
-    opacity: 0.3;
+    opacity: 0.7;
 }
 
 .stream-line {
@@ -471,4 +471,23 @@ body {
         box-shadow: 0 0 40px #a6e22e, 0 0 70px rgba(166, 226, 46, 0.4), inset 0 0 20px #a6e22e;
         text-shadow: 0 0 15px #fff;
     }
+}
+
+/*Slider*/
+
+input[type=range] {
+    cursor: pointer;
+    background: var(--dark-green);
+    height: 8px;
+    border-radius: 5px;
+}
+
+/* Estilo del "boliche" del slider */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 10px var(--green);
 }
