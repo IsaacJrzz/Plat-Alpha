@@ -9,9 +9,13 @@
 <body>
     <div id="game-container">
         <nav id="game-nav">
-            <button onclick="switchTab('shop')" class="nav-btn active">INFRAESTRUCTURA</button>
-            <button onclick="switchTab('achievements')" class="nav-btn">LOGROS</button>
-            <button onclick="showDeployConfirm()" id="deploy-btn-nav" class="nav-btn deploy-locked">DEPLOY (PRESTIGIO)</button>
+            <div class="nav-group-left">
+                <button onclick="switchTab('shop')" class="nav-btn active">INFRAESTRUCTURA</button>
+                <button onclick="switchTab('achievements')" class="nav-btn">LOGROS</button>
+                <button onclick="showDeployConfirm()" id="deploy-btn-nav" class="nav-btn deploy-locked">DEPLOY (LOCKED)</button>
+            </div>
+            
+            <button onclick="switchTab('settings')" class="nav-btn">AJUSTES</button>
         </nav>
 
         <section id="stats-section">
@@ -31,6 +35,14 @@
             <div id="achievements-section" class="tab-content">
                 <h3 class="tab-title">HITOS LOGRADOS</h3>
                 <div id="ach-list"></div>
+            </div>
+            <div id="settings-section" class="tab-content">
+                <h3 class="tab-title">SISTEMA</h3>
+                <div class="shop-item affordable" style="border-color: #ff4444; margin-top: 20px; cursor: default;">
+                    <strong style="color: #ff4444;">REINICIO TOTAL</strong>
+                    <p style="font-size: 0.8rem; margin: 10px 0; color: #888;">Borra todo tu progreso, multiplicadores y logros permanentemente.</p>
+                    <button onclick="hardReset()" style="background: #ff4444; color: #000; border: none; padding: 10px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 4px;">BORRAR PARTIDA</button>
+                </div>
             </div>
         </aside>
 

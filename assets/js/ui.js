@@ -4,13 +4,18 @@ const shopList = document.getElementById('shop-list');
 const consoleDiv = document.getElementById('console');
 const streamContainer = document.getElementById('code-stream-container');
 
-let logs = ["> [System]: Entorno inicializado."];
+// Inicializamos con 5 líneas vacías para que la consola tenga estructura desde el segundo 1
+let logs = ["", "", "", "", ""]; 
 
 function switchTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(`${tabId}-section`).classList.add('active');
-    event.currentTarget.classList.add('active');
+    
+    // Resaltar el botón presionado
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    }
 }
 
 function spawnStreamCode() {
@@ -26,8 +31,22 @@ function spawnStreamCode() {
 function updateUI() {
     locText.innerText = `${formatNum(state.loc)} LoC`;
     ppsText.innerText = `${state.pps.toFixed(1)} l/s`;
-    document.getElementById('multiplier-display').innerText = `Multiplicador: x${state.prestigeMultiplier.toFixed(1)}`;
+    document.getElementById('multiplier-display').innerText = `Bono de Experiencia: x${state.prestigeMultiplier.toFixed(2)}`;
+
+    const deployBtn = document.getElementById('deploy-btn-nav');
+    const pendingBonus = state.totalLocEver / 1000000;
     
+    if (state.totalLocEver >= 1000000) {
+        deployBtn.classList.remove('deploy-locked');
+        deployBtn.classList.add('deploy-ready');
+        deployBtn.innerText = `DEPLOY (+x${pendingBonus.toFixed(1)})`;
+    } else {
+        deployBtn.classList.add('deploy-locked');
+        deployBtn.innerText = `LOCKED (${formatNum(state.totalLocEver)}/1M)`;
+    }
+
+    updateShopButtons();
+
     state.upgrades.forEach(u => {
         if (!u.discovered && state.loc >= u.cost * 0.7) {
             u.discovered = true;
@@ -35,17 +54,6 @@ function updateUI() {
             logMessage(`NUEVO: ${u.name}`);
         }
     });
-
-    updateShopButtons();
-
-    const deployBtn = document.getElementById('deploy-btn-nav');
-    if (state.totalLocEver >= 5000) {
-        deployBtn.classList.remove('deploy-locked');
-        deployBtn.classList.add('deploy-ready');
-    } else {
-        deployBtn.classList.add('deploy-locked');
-        deployBtn.classList.remove('deploy-ready');
-    }
 }
 
 function updateShopButtons() {
@@ -83,42 +91,20 @@ function initShop() {
     });
 }
 
-function buyUpgrade(index) {
-    const upg = state.upgrades[index];
-    if (state.loc >= upg.cost) {
-        state.loc -= upg.cost;
-        upg.count++;
-        upg.cost *= 1.4;
-        calculatePPS();
-        initShop();
-        updateUI();
-        logMessage(`UPGRADE: ${upg.name}`);
+// NUEVA FUNCIÓN LOGMESSAGE: 5 líneas con resaltado en las 3 últimas
+function logMessage(msg) {
+    if (!msg) return;
+    
+    logs.push(`> ${msg}`);
+    if (logs.length > 5) logs.shift();
+
+    if (consoleDiv) {
+        consoleDiv.innerHTML = logs.map((line, index) => {
+            // index 0,1 son DIM (apagadas) | index 2,3,4 son HIGHLIGHT (brillantes)
+            const opacityClass = index >= 2 ? 'log-highlight' : 'log-dim';
+            return `<div class="console-line ${opacityClass}">${line || '&nbsp;'}</div>`;
+        }).join('');
     }
 }
 
-function logMessage(msg) {
-    logs.push(`> ${msg}`);
-    if (logs.length > 4) logs.shift();
-    consoleDiv.innerHTML = logs.map((l, i) => `<div class="console-line ${i===logs.length-1?'new':''}">${l}</div>`).join('');
-}
-
-function showDeployConfirm() {
-    if (state.totalLocEver < 5000) return logMessage("Falta código para el Deploy.");
-    const bonus = (state.totalLocEver / 15000).toFixed(1);
-    document.getElementById('deploy-reward-text').innerText = `Bono de Prestigio: +x${bonus}`;
-    document.getElementById('deploy-modal').style.display = 'flex';
-}
-
 function closeModal() { document.getElementById('deploy-modal').style.display = 'none'; }
-
-function executeDeploy() {
-    const bonus = 1.0 + (state.totalLocEver / 15000);
-    state.prestigeMultiplier = bonus;
-    state.loc = 0;
-    state.upgrades.forEach(u => { u.count = 0; if (u.id !== 'coffee') u.discovered = false; });
-    calculatePPS();
-    initShop();
-    closeModal();
-    updateUI();
-    logMessage("--- DEPLOY EXITOSO ---");
-}
