@@ -1,0 +1,23 @@
+# --- DEPENDENCIAS (PESADAS) ---
+# Esta carpeta ya te aparece en gris porque Git sabe que no debe ir, 
+# pero asegúrate de que esté aquí.
+node_modules/
+
+# --- ARCHIVOS DE CONFIGURACIÓN SENSIBLE ---
+# Aquí guardarás la contraseña de tu MongoDB Atlas.
+.env
+
+# --- ARCHIVOS DE SISTEMA ---
+.DS_Store
+Thumbs.db
+npm-debug.log*
+
+# --- ARCHIVOS DE BLOQUEO DE PAQUETES ---
+# Opcional: algunos prefieren no subir el lock si es un portfolio pequeño, 
+# pero suele ser buena práctica subirlo. Si quieres ignorarlo:
+# package-lock.json
+
+# --- DATOS DE PRUEBA / JSON ---
+# Si generas algún archivo .json con datos de partidas de prueba
+*.json.bak
+backup_data.json
